@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Resize</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        const canvas = document.querySelector('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let context = canvas.getContext('2d');
+
+        //Rectangular
+        context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        context.fillRect(200, 200, 500, 700);
+
+        context.fillStyle = 'rgba(0, 255, 0, 0.5)';
+        context.fillRect(400, 400, 900, 300);
+
+        //Line
+        context.beginPath();
+        context.moveTo(100, 200);
+        context.lineTo(200, 400);
+        context.lineTo(100, 400);
+        context.lineTo(100, 200);
+        context.strokeStyle = 'blue';
+        context.stroke();
+
+        // Arc / Circle
+        // context.arc(x, y, r, startAngle: Float, endAngle: Float, drawCounterClockwise: Bool (false));
+        context.beginPath();
+        context.arc(700, 700, 30, 0, Math.PI * 2, false);
+        context.stroke();
+
+        for (let i = 0; i < 5000; i++){
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * window.innerHeight;
+
+            let radius = Number(Math.random() * 300);
+            let r = Number(Math.random() * 255) + 1;
+            let g = Number(Math.random() * 255) + 1;
+            let b = Number(Math.random() * 255) + 1;
+            let a = 0.5 + Math.random();
+
+            context.beginPath();
+            context.arc(x, y, radius, 0, Math.PI * 2, false);
+            context.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+            context.stroke();
+        }
+
+    </script>
+</body>
+</html>

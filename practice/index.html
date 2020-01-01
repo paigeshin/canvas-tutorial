@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Practice</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            border: black solid 1px;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+
+    <script>
+        const canvas = document.querySelector('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let context = canvas.getContext('2d');
+
+        let arr = [drawW, drawI, drawK, drawI, drawText, drawO, drawK];
+
+        let currentPosition = 0;
+        setInterval(() => {
+            switch (currentPosition) {
+                case 0 :
+                    arr[currentPosition](200, 200);
+                    break;
+                case 1 :
+                    arr[currentPosition](700, 200);
+                    break;
+                case 2 :
+                    arr[currentPosition](800, 300);
+                    break;
+                case 3:
+                    arr[currentPosition](900, 200);
+                    break;
+                case 4:
+                    arr[currentPosition](200, 600, "똥글싸지말고 취업이나 해라");
+                    break;
+                case 5:
+                    arr[currentPosition](700, 700, 80);
+                    break;
+                case 6:
+                    arr[currentPosition](800, 700);
+                    break;
+                default :
+                    screwUp();
+            }
+            currentPosition ++;
+        }, 800);
+
+        function screwUp(){
+            for (let i = 0; i < 1000; i++){
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+
+                let radius = Number(Math.random() * 300);
+                let r = Number(Math.random() * 255) + 1;
+                let g = Number(Math.random() * 255) + 1;
+                let b = Number(Math.random() * 255) + 1;
+                let a = 0.5 + Math.random();
+
+                context.beginPath();
+                context.arc(x, y, radius, 0, Math.PI * 2, false);
+                context.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+                context.stroke();
+            }
+        }
+
+        function drawW(x, y){
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x + 100, y + 200);
+            context.lineTo(x + 200, y);
+            context.lineTo(x + 300, y + 200);
+            context.lineTo(x+ 400, y);
+            context.stroke();
+        }
+
+        function drawI(x, y){
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x, y + 200);
+            context.stroke();
+        }
+
+        function drawK(x , y){
+            //K
+            context.beginPath();
+            context.moveTo(x, y - 100);
+            context.lineTo(x, y + 100);
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x + 50, y - 100);
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x + 50, y + 100);
+            context.stroke();
+        }
+
+        function drawText(x, y, string){
+            context.font = '48px serif';
+            context.fillText(string, 200, 600);
+        }
+
+        function drawO(x , y, r){
+            context.beginPath();
+            context.arc(x, y, r, 0, Math.PI * 2, false);
+            context.stroke();
+        }
+
+
+    </script>
+</body>
+</html>
